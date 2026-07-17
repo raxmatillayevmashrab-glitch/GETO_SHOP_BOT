@@ -36,6 +36,8 @@ import logging
 from datetime import datetime
 
 from aiogram import Bot, Dispatcher, F, Router
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -288,7 +290,7 @@ async def my_orders(message: Message):
 
 
 async def main():
-    bot = Bot(token=config.BOT_TOKEN, parse_mode="HTML")
+    bot = Bot(token=config.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher(storage=MemoryStorage())
     dp.include_router(router)
     await dp.start_polling(bot)
